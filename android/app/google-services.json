@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "103646584067",
+    "project_id": "wallet-129a7",
+    "storage_bucket": "wallet-129a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:103646584067:android:aad8e63b4876e6caf91d36",
+        "android_client_info": {
+          "package_name": "com.halimrafi.wallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "103646584067-rc2tnh158vklq87t8sotjng6kb668fds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdpx2Sc8nD7G4VYzLqS-czX3JQQWVfI2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "103646584067-rc2tnh158vklq87t8sotjng6kb668fds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
