@@ -1,9 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:wallet/models/wallet.dart';
+import 'package:wallet/services/wallet_service.dart';
 import 'package:wallet/utils/styles.dart';
 import 'firebase_options.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,29 +41,55 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  @override
+  void initState() {
+    super.initState();
+
+    WalletService().getWallets('uid');
+  }
+
   void _incrementCounter() async {
-    Wallet newWallet = Wallet(
-      uid: 'uid',
-      amount: 100,
-      name: 'name',
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
+
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(12.0),
+              topRight: Radius.circular(12.0)
+            )
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 10.0,
+                vertical: 15.0
+            ),
+            child: Column(
+              children: [
+                Text(
+                  'Create New Wallet',
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+                const SizedBox(height: 20,),
+                const TextField(
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    labelText: 'Wallet Name here',
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: AppTheme.primary
+                      )
+                    )
+                  ),
+                ),
+
+              ],
+            ),
+          ),
+        );
+      },
     );
-
-    FirebaseFirestore.instance
-        .collection('wallet')
-        .withConverter<Wallet>(
-          fromFirestore: (snapshots, _) => Wallet.fromJson({
-            'id': snapshots.id,
-            ...snapshots.data()!,
-          }),
-          toFirestore: (wallet, _) => wallet.toJson(),
-        )
-        .add(newWallet);
-
-    setState(() {
-      _counter++;
-    });
   }
 
   @override
